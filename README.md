@@ -1,4 +1,6 @@
 # 🧩Connecting IP101GA to ESP32 and Running an HTTP Server (RMII)
+![ESP32](https://img.shields.io/badge/ESP32-Ethernet)
+![ESP-IDF](https://img.shields.io/badge/ESP--IDF-v5.2%2B-orange)
 
 ## 🗒️Description
 
@@ -6,7 +8,7 @@ This guide explains how to connect the IP101GA Ethernet PHY chip to an ESP32 mic
 
 ---
 
-## Required Components
+## 🛠Required Components
 
 - ESP32 (WROOM or WROVER)
 - PHY chip: **IP101GA**
@@ -16,7 +18,7 @@ This guide explains how to connect the IP101GA Ethernet PHY chip to an ESP32 mic
 
 ---
 
-## IP101GA to ESP32 Wiring (Scheme)
+## 🔧IP101GA to ESP32 Wiring (Scheme)
 
 ```plaintext
 
