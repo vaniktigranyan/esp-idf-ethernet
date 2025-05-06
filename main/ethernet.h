@@ -13,7 +13,6 @@
 #include "freertos/event_groups.h"
 
 
-
 void init_ethernet();
 
 #endif
