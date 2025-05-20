@@ -1,11 +1,13 @@
 {
     "files.associations": {
+        "*.md": "dart",
         "array": "c",
         "string": "c",
         "string_view": "c",
         "*.tcc": "cpp",
         "sstream": "c",
         "system_error": "c",
-        "cerrno": "c"
+        "cerrno": "c",
+        "http_server.h": "c"
     }
 }
