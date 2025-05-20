@@ -10,9 +10,7 @@
 #include <ethernet.h>
 #include "http_server.h"
 
-
 #define TAG "example"
-
 
 void app_main(){  
     // Initialize NVS.
@@ -21,7 +19,7 @@ void app_main(){
         ESP_ERROR_CHECK(nvs_flash_erase());
     }
 
-
+    init_spiffs();
     init_ethernet();
     server_initiation(); 
 }

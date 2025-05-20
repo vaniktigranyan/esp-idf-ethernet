@@ -10,23 +10,52 @@
 #include "esp_http_server.h"
 #include "cJSON.h"
 #include"http_server.h"
-
+#include "esp_spiffs.h"
 
 static const char *TAG = "MY SERVER >> ";
 httpd_handle_t server_handle = NULL;
 void delete_server(){
     httpd_stop(&server_handle);
 }
+void init_spiffs() {
+    ESP_LOGI("SPIFFS", "Initializing SPIFFS");
+    //init spiffs
+    esp_vfs_spiffs_conf_t conf = {
+        .base_path = "/spiffs",
+        .partition_label = NULL,
+        .max_files = 5,
+        .format_if_mount_failed = true
+    };
+
+    esp_err_t ret = esp_vfs_spiffs_register(&conf);
+    if (ret != ESP_OK) {
+        ESP_LOGE("SPIFFS", "Failed to mount or format filesystem");
+    } else {
+        size_t total, used;
+        esp_spiffs_info(NULL, &total, &used);
+        ESP_LOGI("SPIFFS", "Partition size: total: %d, used: %d", total, used);
+    }
+}
 
 static esp_err_t get_handler(httpd_req_t *req)
 {  
     ESP_LOGI("GET ======================>>", "Received request for URI: %s", req->uri);
 
-    char *response_message = "URI Response ...";
-    httpd_resp_send(req, response_message, HTTPD_RESP_USE_STRLEN);
+    FILE* f = fopen("/spiffs/index.html", "r"); // open html file
+    if (f == NULL) {
+        httpd_resp_send_404(req);
+        return ESP_FAIL;
+    }
+
+    char line[128];
+    while (fgets(line, sizeof(line), f)) {// file
+        httpd_resp_send_chunk(req, line, strlen(line)); // send data in interface
+    }
+    fclose(f);// close file
+    httpd_resp_send_chunk(req, NULL, 0); // end
+
     return ESP_OK;
 }
-
 static esp_err_t post_handler(httpd_req_t *req)
 {
     char content[2048];  // buffer

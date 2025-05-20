@@ -3,6 +3,6 @@
 
 
 void server_initiation();
-
+void init_spiffs();
 
 #endif

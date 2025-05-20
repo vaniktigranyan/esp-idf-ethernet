@@ -4,4 +4,5 @@ set(COMPONENT_ADD_INCLUDEDIRS ".")
 
 register_component()
 
-spiffs_create_partition_image(storage ../spiffs FLASH_IN_PROJECT)
+spiffs_create_partition_image(storage ${CMAKE_CURRENT_SOURCE_DIR}/spiffs FLASH_IN_PROJECT)
+
